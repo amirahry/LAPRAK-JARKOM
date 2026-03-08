@@ -25,6 +25,7 @@ Wireshark berhasil diinstall dan dibuka.
 
 ### 2. Memilih Interface Wi-Fi dan Memulai Capture
 Interface **Wi-Fi** dipilih untuk mulai menangkap paket jaringan.
+![Instalasi Wireshark](../assets/image/InterfaceWiFi.png)
 
 ### 3. Mengakses Website Percobaan
 ![Gaia Website](../assets/image/Gaia.png)
