@@ -17,9 +17,8 @@
  
  ## Lampiran
  ![Python](../assets/image/InstalasiPython.png)
- ![Wireshark](../assets/image/InstalasiWireshark1.png) 
- ![Wireshark](../assets/image/Wireshark2.png)
+ ![Wireshark](../assets/image/InstalasiWireShark1.png) 
+ ![Wireshark](../assets/image/InstalasiWireshark2.png)
  
-  
  ## Kesimpulan 
  Wireshark dan Python berhasil terinstall dan berfungsi dengan baik di laptop, sehingga siap digunakan untuk praktikum jaringan komputer.
