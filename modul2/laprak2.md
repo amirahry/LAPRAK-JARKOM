@@ -20,11 +20,10 @@ Mengenal dan menggunakan fitur dasar Wireshark untuk menangkap dan menganalisis 
 ## Hasil dan Pembahasan
 
 ### 1. Instalasi dan Membuka Aplikasi Wireshark
-![Instalasi Wireshark](../assets/image/InstalasiWireShark1.png)
+![Instalasi Wireshark](../assets/image/InstalasiWireshark2.png)
 Wireshark berhasil diinstall dan dibuka.
 
 ### 2. Memilih Interface Wi-Fi dan Memulai Capture
-![Interface WiFi](../assets/image/interface Wi-Fi.png)
 Interface **Wi-Fi** dipilih untuk mulai menangkap paket jaringan.
 
 ### 3. Mengakses Website Percobaan
