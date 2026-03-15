@@ -83,7 +83,7 @@ Password : network
 Halaman ini merupakan halaman HTML sederhana yang berhasil diakses melalui browser.
 
 #### Hasil Capture Wireshark
-![HTTP GET](../assets/image/http.png)
+![HTTP GET](../assets/image/http3.png)
 
 Pada hasil capture Wireshark terlihat bahwa browser mengirimkan request **HTTP GET** ke server `gaia.cs.umass.edu`. Server kemudian memberikan respon **HTTP/1.1 200 OK** yang menandakan bahwa permintaan berhasil diproses.
 
