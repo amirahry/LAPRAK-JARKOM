@@ -10,9 +10,7 @@
 - Browser
 - Koneksi internet
 
----
-
-# Langkah Percobaan
+## Langkah Percobaan
 
 ### 1. Basic HTTP GET / Response
 1. Membuka aplikasi Wireshark.
@@ -26,8 +24,6 @@ http://gaia.cs.umass.edu/wireshark-labs/HTTP-wireshark-file1.html
 
 5. Setelah halaman terbuka, menghentikan proses capture pada Wireshark.
 
----
-
 ### 2. HTTP Conditional GET
 1. Membersihkan cache dan history pada browser.
 2. Menjalankan Wireshark dan mulai capture paket.
@@ -37,10 +33,8 @@ http://gaia.cs.umass.edu/wireshark-labs/HTTP-wireshark-file1.html
 http://gaia.cs.umass.edu/wireshark-labs/HTTP-wireshark-file2.html
 ```
 
-4. Melakukan refresh halaman tersebut beberapa kali.
-5. Menghentikan capture paket dan menerapkan filter `http`.
-
----
+4. Melakukan refresh halaman beberapa kali.
+5. Menghentikan capture paket.
 
 ### 3. Retrieving Long Documents
 1. Membersihkan cache browser.
@@ -53,11 +47,9 @@ http://gaia.cs.umass.edu/wireshark-labs/HTTP-wireshark-file3.html
 
 4. Setelah halaman terbuka, menghentikan capture paket.
 
----
-
 ### 4. HTML dengan Embedded Objects
 1. Menjalankan Wireshark dan mulai capture paket.
-2. Membuka halaman berikut pada browser:
+2. Membuka halaman berikut:
 
 ```
 http://gaia.cs.umass.edu/wireshark-labs/HTTP-wireshark-file4.html
@@ -65,8 +57,6 @@ http://gaia.cs.umass.edu/wireshark-labs/HTTP-wireshark-file4.html
 
 3. Halaman tersebut menampilkan HTML dengan beberapa gambar.
 4. Menghentikan proses capture pada Wireshark.
-
----
 
 ### 5. HTTP Authentication
 1. Menjalankan Wireshark dan mulai capture paket.
@@ -83,80 +73,73 @@ Password : network
 
 4. Setelah halaman berhasil dibuka, hentikan capture paket.
 
----
+## Hasil dan Pembahasan
 
-# Hasil dan Pembahasan
+### 1. Basic HTTP GET / Response
 
-## 1. Basic HTTP GET
+#### Tampilan Halaman Web
+![Halaman file1](../assets/image/file1.png)
 
-### Tampilan Halaman Web
-![Halaman file1](file1.png)
+Halaman ini merupakan halaman HTML sederhana yang berhasil diakses melalui browser.
 
-Halaman di atas merupakan file HTML sederhana yang berhasil diakses melalui browser.
+#### Hasil Capture Wireshark
+![HTTP GET](../assets/image/http.png)
 
-### Hasil Capture Wireshark
-![Wireshark HTTP 200 OK](http.png)
+Pada hasil capture Wireshark terlihat bahwa browser mengirimkan request **HTTP GET** ke server `gaia.cs.umass.edu`. Server kemudian memberikan respon **HTTP/1.1 200 OK** yang menandakan bahwa permintaan berhasil diproses.
 
-Pada hasil capture Wireshark terlihat bahwa browser mengirimkan request **HTTP GET** ke server gaia.cs.umass.edu. Server kemudian memberikan respon **HTTP 200 OK** yang menandakan bahwa permintaan berhasil diproses.
+### 2. HTTP Conditional GET
 
----
+#### Menghapus Cache Browser
+![Delete Cache](../assets/image/deletecache.png)
 
-## 2. Conditional GET
+Sebelum melakukan percobaan Conditional GET, cache pada browser dibersihkan terlebih dahulu agar browser mengirim permintaan HTTP kembali ke server.
 
-### Tampilan Halaman Web
-![Halaman file2](file2.png)
+#### Tampilan Halaman Web
+![Halaman file2](../assets/image/file%202.png)
 
-Halaman ini diakses setelah cache browser dibersihkan.
+Halaman ini menampilkan teks sederhana setelah file berhasil diakses dari server.
 
-### Hasil Capture Wireshark
-![Wireshark Conditional GET](conditional get.png)
+#### Hasil Capture Wireshark
+![Conditional GET](../assets/image/conditionalget.png)
 
-Pada Wireshark terlihat bahwa browser mengirim request HTTP kembali ke server. Server kemudian memberikan respon **304 Not Modified** yang berarti file tidak berubah sehingga browser dapat menggunakan file dari cache.
+Pada Wireshark terlihat bahwa browser mengirim request HTTP kembali ke server. Server kemudian memberikan respon **304 Not Modified** yang berarti file tidak berubah sehingga browser dapat menggunakan file yang tersimpan di cache.
 
----
+### 3. Retrieving Long Documents
 
-## 3. Retrieving Long Documents
+#### Tampilan Halaman Web
+![Halaman file3](../assets/image/file%203.png)
 
-### Tampilan Halaman Web
-![Halaman file3](file3.png)
+Halaman ini menampilkan dokumen HTML yang cukup panjang yaitu teks mengenai **Bill of Rights**.
 
-Halaman ini berisi dokumen HTML yang cukup panjang yaitu teks mengenai **Bill of Rights**.
+#### Hasil Capture Wireshark
+![Retrieving Long Document](../assets/image/retrieving.png)
 
-### Hasil Capture Wireshark
-![Wireshark Retrieving Long](retrieving.png)
+Pada Wireshark terlihat bahwa respon HTTP dari server dikirim dalam beberapa paket TCP karena ukuran file HTML cukup besar sehingga tidak dapat dikirim dalam satu paket saja.
 
-Pada Wireshark terlihat bahwa respon HTTP dari server dikirim dalam beberapa paket TCP karena ukuran file yang cukup besar.
+### 4. HTML Documents dengan Embedded Objects
 
----
+#### Tampilan Halaman Web
+![Halaman file4](../assets/image/file%204.png)
 
-## 4. HTML dengan Embedded Objects
+Halaman ini merupakan file HTML yang memiliki objek tambahan berupa gambar yang disimpan pada server lain.
 
-### Tampilan Halaman Web
-![Halaman file4](file4.png)
+#### Hasil Capture Wireshark
+![Embedded Objects](../assets/image/html.png)
 
-Halaman ini merupakan file HTML yang memiliki objek tambahan berupa gambar.
+Pada Wireshark terlihat beberapa request **HTTP GET** yang dikirim oleh browser untuk mengambil file HTML serta gambar yang terdapat pada halaman tersebut. Hal ini menunjukkan bahwa setiap objek pada halaman web diambil secara terpisah oleh browser.
 
-### Hasil Capture Wireshark
-![Wireshark Embedded Objects](html.png)
+### 5. HTTP Authentication
 
-Pada Wireshark terlihat beberapa request **HTTP GET** yang dikirim browser untuk mengambil file HTML serta gambar yang terdapat pada halaman tersebut.
+#### Tampilan Login
+![Login Page](../assets/image/file5.png)
 
----
+Pada halaman ini pengguna diminta memasukkan username dan password sebelum halaman dapat diakses.
 
-## 5. HTTP Authentication
+#### Hasil Capture Wireshark
+![Authentication HTTP](../assets/image/http.png)
 
-### Tampilan Login
-![Login Page](file5.png)
+Pada hasil capture Wireshark terlihat adanya header **Authorization: Basic** yang berisi informasi username dan password yang dikodekan menggunakan **Base64**. Meskipun terlihat seperti terenkripsi, sebenarnya data tersebut masih dapat diterjemahkan kembali sehingga metode ini tidak sepenuhnya aman jika tidak menggunakan protokol tambahan seperti **HTTPS**.
 
-Halaman ini meminta username dan password sebelum halaman dapat diakses.
+## Kesimpulan
 
-### Hasil Capture Wireshark
-![Wireshark Authentication](conditionalget.png)
-
-Pada hasil capture Wireshark terlihat proses autentikasi HTTP dimana browser mengirimkan header **Authorization** yang berisi username dan password yang telah dikodekan menggunakan Base64.
-
----
-
-# Kesimpulan
-
-Berdasarkan praktikum yang telah dilakukan dapat diketahui bahwa protokol HTTP digunakan untuk komunikasi antara client dan server dalam mengakses halaman web. Dengan menggunakan Wireshark kita dapat melihat secara langsung proses pertukaran paket HTTP seperti request GET, respon dari server, conditional GET, pengambilan dokumen HTML berukuran besar, pengambilan objek tambahan pada halaman web, serta proses autentikasi HTTP.
+Berdasarkan praktikum yang telah dilakukan dapat diketahui bahwa protokol **HTTP** digunakan untuk komunikasi antara client dan server dalam mengakses halaman web. Dengan menggunakan **Wireshark**, kita dapat melihat proses pertukaran paket HTTP seperti request GET, respon dari server, conditional GET, pengambilan dokumen HTML berukuran besar, pengambilan objek tambahan pada halaman web, serta proses autentikasi HTTP.
