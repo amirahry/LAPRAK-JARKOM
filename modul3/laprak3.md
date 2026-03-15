@@ -133,12 +133,14 @@ Pada Wireshark terlihat beberapa request **HTTP GET** yang dikirim oleh browser 
 #### Tampilan Login
 ![Login Page](../assets/image/file5.png)
 
-Pada halaman ini pengguna diminta memasukkan username dan password sebelum halaman dapat diakses.
+Pada halaman ini pengguna diminta memasukkan username dan password sebelum halaman dapat diakses. Proses ini merupakan mekanisme autentikasi untuk memastikan bahwa hanya pengguna yang memiliki kredensial yang dapat mengakses halaman tersebut.
 
 #### Hasil Capture Wireshark
-![Authentication HTTP](../assets/image/http.png)
+![Authorization Basic](../assets/image/authentication.png)
 
-Pada hasil capture Wireshark terlihat adanya header **Authorization: Basic** yang berisi informasi username dan password yang dikodekan menggunakan **Base64**. Meskipun terlihat seperti terenkripsi, sebenarnya data tersebut masih dapat diterjemahkan kembali sehingga metode ini tidak sepenuhnya aman jika tidak menggunakan protokol tambahan seperti **HTTPS**.
+Pada hasil capture Wireshark digunakan filter `http.authorization` untuk menampilkan paket yang mengandung header autentikasi. Terlihat adanya header **Authorization: Basic** yang berisi username dan password dalam bentuk **Base64**.
+
+Data tersebut merupakan hasil encoding dari **wireshark-students:network**. Meskipun terlihat seperti terenkripsi, sebenarnya data ini masih dapat dikembalikan ke bentuk aslinya sehingga metode ini kurang aman jika tidak menggunakan protokol tambahan seperti **HTTPS**.
 
 ## Kesimpulan
 
