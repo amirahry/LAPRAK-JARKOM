@@ -29,7 +29,7 @@ nslookup www.yahoo.com
 
 ### 2. Ipconfig
 1. Membuka Command Prompt.
-2. Menjalankan perintah berikut:
+2. Menjalankan:
 
 
 ipconfig /all
@@ -70,25 +70,12 @@ http://www.ietf.org
 #### Hasil Percobaan
 ![nslookup](../assets/image/nslookup.png)
 
-Contoh output:
-
-Server: dns.google
-Address: 8.8.8.8
-
-Non-authoritative answer:
-Name: www.google.com
-
-Address: 142.250.xxx.xxx
-
-
 #### Pembahasan
-Perintah nslookup digunakan untuk mengetahui alamat IP dari suatu domain.
+Perintah `nslookup` digunakan untuk mengetahui alamat IP dari suatu domain.
 
-- `nslookup www.google.com` digunakan untuk mendapatkan IP address domain.
+- `nslookup www.google.com` menghasilkan alamat IP dari domain tersebut.
 - `nslookup -type=NS google.com` digunakan untuk mengetahui DNS server otoritatif.
-- `nslookup www.yahoo.com 8.8.8.8` digunakan untuk query ke DNS tertentu.
-
-Non-authoritative answer berarti jawaban berasal dari cache DNS, bukan langsung dari server utama.
+- Nslookup bekerja dengan mengirim query ke DNS server dan menerima response berupa alamat IP.
 
 ---
 
@@ -98,13 +85,13 @@ Non-authoritative answer berarti jawaban berasal dari cache DNS, bukan langsung 
 ![ipconfig](../assets/image/ipconfig.png)
 
 #### Pembahasan
-Perintah ipconfig digunakan untuk melihat konfigurasi jaringan.
+Perintah `ipconfig` digunakan untuk melihat konfigurasi jaringan.
 
-- `ipconfig /all` menampilkan IP address, DNS, dan gateway.
-- `ipconfig /displaydns` menampilkan cache DNS.
-- `ipconfig /flushdns` menghapus cache DNS.
+- `ipconfig /all` menampilkan informasi lengkap seperti IP Address, DNS server, dan gateway.
+- `ipconfig /displaydns` menampilkan cache DNS yang tersimpan.
+- `ipconfig /flushdns` digunakan untuk menghapus cache DNS.
 
-Cache DNS membantu mempercepat akses website.
+Cache DNS digunakan agar akses website lebih cepat tanpa query ulang ke server.
 
 ---
 
@@ -114,11 +101,15 @@ Cache DNS membantu mempercepat akses website.
 ![dns wireshark](../assets/image/dns.png)
 
 #### Pembahasan
-Pada Wireshark terlihat komunikasi DNS antara client dan server.
+Pada Wireshark terlihat proses komunikasi DNS antara client dan server.
 
-- Client mengirim DNS Query
-- Server membalas DNS Response
-- Menggunakan protokol UDP port 53
+- Client mengirim DNS Query untuk mencari IP dari domain.
+- Server membalas DNS Response berisi alamat IP.
+- Protokol yang digunakan adalah UDP (port 53).
+
+DNS bekerja dengan sistem client-server:
+- Client meminta informasi
+- DNS server memberikan jawaban
 
 ---
 
@@ -130,17 +121,20 @@ Pada Wireshark terlihat komunikasi DNS antara client dan server.
 #### Pembahasan
 Dari hasil analisis:
 
-- Query berisi nama domain
-- Response berisi alamat IP
-- Terdapat Transaction ID, Flags, Questions, Answers
+- Query berisi nama domain (contoh: www.ietf.org)
+- Response berisi alamat IP domain tersebut
+- Terdapat informasi seperti:
+  - Transaction ID
+  - Flags
+  - Questions dan Answers
 
-Menunjukkan proses translasi domain ke IP berjalan dengan baik.
+Hal ini menunjukkan proses translasi domain ke IP address berjalan dengan benar.
 
 ---
 
 ## Kesimpulan
 
-1. DNS menerjemahkan domain menjadi IP address.
-2. Nslookup dan ipconfig membantu analisis DNS.
-3. Wireshark menampilkan proses query dan response DNS.
-4. DNS umumnya menggunakan UDP port 53.
+1. DNS berfungsi untuk menerjemahkan domain menjadi alamat IP.
+2. Tools seperti nslookup dan ipconfig membantu dalam analisis DNS.
+3. Wireshark dapat digunakan untuk melihat proses query dan response DNS secara detail.
+4. Proses DNS umumnya menggunakan protokol UDP pada port 53.
