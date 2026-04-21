@@ -1,3 +1,19 @@
+## LAPORAN PRAKTIKUM MODUL 4 : DNS
+
+## Tujuan Praktikum
+1. Mengetahui cara kerja DNS menggunakan Wireshark.
+2. Memahami proses query dan response DNS.
+3. Mengamati penggunaan tools nslookup dan ipconfig.
+
+## Alat dan Bahan
+- Wireshark
+- Command Prompt / Terminal
+- Browser
+- Koneksi internet
+
+---
+## Hasil dan Pembahasan
+
 ## 1. Nslookup
 
 Pada praktikum ini digunakan perintah `nslookup` untuk mengetahui informasi DNS seperti alamat IP, DNS server otoritatif, dan mail server suatu domain.
@@ -15,14 +31,15 @@ nslookup www.mit.edu
 ![nslookup mit](../assets/image/nslookup_mit.png)
 
 #### Pembahasan dan Jawaban
-Perintah ini digunakan untuk mengetahui alamat IP dari domain **www.mit.edu**.
+Berdasarkan hasil pada gambar, domain **www.mit.edu** memiliki beberapa alamat IP, yaitu:
 
-Alamat IP server:
-- 23.217.163.122
-- 2001:4488:f931:1a3::255e
-- 2001:4488:f931:19e::255e
+- 23.217.163.122  
+- 2001:4488:f931:1a3::255e  
+- 2001:4488:f931:19e::255e  
 
-Hal ini menunjukkan bahwa satu domain dapat memiliki beberapa alamat IP (IPv4 dan IPv6) karena adanya **load balancing** dan penggunaan **Content Delivery Network (CDN)**.
+Selain itu, terlihat bahwa hasil yang ditampilkan merupakan **Non-authoritative answer**, yang berarti jawaban diperoleh dari cache DNS, bukan langsung dari server otoritatif.
+
+Hal ini menunjukkan bahwa satu domain dapat memiliki lebih dari satu alamat IP untuk meningkatkan performa dan keandalan akses.
 
 ---
 
@@ -37,12 +54,14 @@ nslookup -type=NS ox.ac.uk
 ![nslookup ns](../assets/image/nslookup_nx.png)
 
 #### Pembahasan dan Jawaban
-Perintah ini digunakan untuk mengetahui DNS server otoritatif dari domain **ox.ac.uk**.
+Berdasarkan hasil pada gambar, query dilakukan ke server DNS:
+- tusbind.ac.id (10.217.7.77)
 
-Server DNS otoritatif:
-- oxforduni.in.tmes.trendmicro.eu
+Hasil menunjukkan bahwa domain **ox.ac.uk** memiliki server DNS:
 
-DNS server otoritatif merupakan server yang menyimpan data resmi dari suatu domain.
+- oxforduni.in.tmes.trendmicro.eu  
+
+Jawaban yang diberikan juga merupakan **Non-authoritative answer**, yang berarti informasi diperoleh dari cache DNS server lokal.
 
 ---
 
@@ -57,20 +76,23 @@ nslookup -type=MX yahoo.com
 ![nslookup mx](../assets/image/nslookup_mx.png)
 
 #### Pembahasan dan Jawaban
-Perintah ini digunakan untuk mengetahui mail server dari domain **yahoo.com**.
+Berdasarkan hasil pada gambar, domain memiliki mail server:
 
-Mail server:
-- mta5.am0.yahoodns.net
-- mta6.am0.yahoodns.net
+- oxforduni.in.tmes.trendmicro.eu  
 
-Alamat IP:
-- (isi sesuai hasil pada screenshot kamu)
+Dengan alamat IP:
+- 34.147.168.147  
+- 35.242.183.249  
+- 35.242.142.110  
+- 35.189.126.202  
 
-Mail server digunakan untuk menangani pengiriman dan penerimaan email. Adanya beberapa server menunjukkan adanya sistem **redundansi** untuk meningkatkan keandalan layanan.
+Hasil juga menunjukkan **Non-authoritative answer**, yang berarti jawaban diperoleh dari cache DNS.
+
+Mail server digunakan untuk menangani pengiriman dan penerimaan email, dan adanya beberapa IP menunjukkan adanya sistem redundansi.
 
 ---
 
-### d. Nslookup Domain Lain (Tambahan)
+### d. Nslookup Domain Lain (Telkom University)
 
 Perintah:
 
@@ -81,8 +103,12 @@ nslookup lms.telkomuniversity.ac.id
 ![nslookup telkom](../assets/image/nslookup_telkom.png)
 
 #### Pembahasan
-Perintah ini digunakan untuk mengetahui alamat IP domain lain sebagai perbandingan.
+Berdasarkan hasil pada gambar, domain **lms.telkomuniversity.ac.id** memiliki beberapa alamat IP, baik IPv4 maupun IPv6.
 
-Hasil menunjukkan bahwa domain tersebut memiliki beberapa alamat IP (IPv4 dan IPv6), yang menandakan adanya distribusi server untuk meningkatkan performa dan keandalan akses.
+Selain itu, terdapat bagian:
+- Name: proxy-fallback.celoe.in  
+- Aliases: lms.telkomuniversity.ac.id  
+
+Hal ini menunjukkan bahwa domain menggunakan sistem alias (CNAME) dan didistribusikan melalui beberapa server untuk meningkatkan performa dan ketersediaan layanan.
 
 ---
