@@ -11,130 +11,94 @@
 - Browser
 - Koneksi internet
 
-## Langkah Percobaan
-
-### 1. Nslookup
-1. Membuka Command Prompt.
-2. Menjalankan perintah berikut:
-
-
-nslookup www.google.com
-
-nslookup -type=NS google.com
-nslookup www.yahoo.com
- 8.8.8.8
-
-
----
-
-### 2. Ipconfig
-1. Membuka Command Prompt.
-2. Menjalankan:
-
-
-ipconfig /all
-ipconfig /displaydns
-ipconfig /flushdns
-
-
----
-
-### 3. Tracing DNS dengan Wireshark
-1. Menghapus cache DNS dengan perintah:
-
-
-ipconfig /flushdns
-
-
-2. Menjalankan Wireshark.
-3. Menggunakan filter:
-
-
-dns
-
-
-4. Membuka browser dan mengakses:
-
-
-http://www.ietf.org
-
-
-5. Menghentikan capture.
-
----
-
 ## Hasil dan Pembahasan
+## 1. Nslookup
 
-### 1. Nslookup
-
-#### Hasil Percobaan
-![nslookup](../assets/image/nslookup.png)
-
-#### Pembahasan
-Perintah `nslookup` digunakan untuk mengetahui alamat IP dari suatu domain.
-
-- `nslookup www.google.com` menghasilkan alamat IP dari domain tersebut.
-- `nslookup -type=NS google.com` digunakan untuk mengetahui DNS server otoritatif.
-- Nslookup bekerja dengan mengirim query ke DNS server dan menerima response berupa alamat IP.
+Pada praktikum ini digunakan perintah `nslookup` untuk mengetahui informasi DNS seperti alamat IP, DNS server otoritatif, dan mail server suatu domain.
 
 ---
 
-### 2. Ipconfig
+### a. Mencari Alamat IP Domain
 
-#### Hasil Percobaan
-![ipconfig](../assets/image/ipconfig.png)
+Perintah:
+
+nslookup www.mit.edu
+
+
+#### Hasil
+![nslookup mit](../assets/image/nslookup_mit.png)
 
 #### Pembahasan
-Perintah `ipconfig` digunakan untuk melihat konfigurasi jaringan.
+Perintah ini digunakan untuk mengetahui alamat IP dari domain **www.mit.edu**.
 
-- `ipconfig /all` menampilkan informasi lengkap seperti IP Address, DNS server, dan gateway.
-- `ipconfig /displaydns` menampilkan cache DNS yang tersimpan.
-- `ipconfig /flushdns` digunakan untuk menghapus cache DNS.
+Alamat IP yang diperoleh:
+- 23.217.163.122
+- 2001:4488:f931:1a3::255e
+- 2001:4488:f931:19e::255e
 
-Cache DNS digunakan agar akses website lebih cepat tanpa query ulang ke server.
+Hal ini menunjukkan satu domain dapat memiliki beberapa alamat IP karena adanya **load balancing** dan penggunaan **Content Delivery Network (CDN)**.
 
 ---
 
-### 3. DNS di Wireshark
+### b. Mengetahui DNS Server Otoritatif
 
-#### Hasil Capture
-![dns wireshark](../assets/image/dns.png)
+Perintah:
+
+nslookup -type=NS ox.ac.uk
+
+
+#### Hasil
+![nslookup ns](../assets/image/nslookup_ns.png)
 
 #### Pembahasan
-Pada Wireshark terlihat proses komunikasi DNS antara client dan server.
+Perintah ini digunakan untuk mengetahui DNS server otoritatif dari domain **ox.ac.uk**.
 
-- Client mengirim DNS Query untuk mencari IP dari domain.
-- Server membalas DNS Response berisi alamat IP.
-- Protokol yang digunakan adalah UDP (port 53).
+Server DNS:
+- oxforduni.in.tmes.trendmicro.eu
 
-DNS bekerja dengan sistem client-server:
-- Client meminta informasi
-- DNS server memberikan jawaban
+DNS server otoritatif merupakan server yang memiliki informasi resmi mengenai suatu domain.
 
 ---
 
-### 4. Analisis DNS Query & Response
+### c. Mengetahui Mail Server (MX Record)
 
-#### Hasil Capture Detail
-![dns detail](../assets/image/dns_detail.png)
+Perintah:
+
+nslookup -type=MX ox.ac.uk
+
+
+#### Hasil
+![nslookup mx](../assets/image/nslookup_mx.png)
 
 #### Pembahasan
-Dari hasil analisis:
+Perintah ini digunakan untuk mengetahui mail server dari suatu domain.
 
-- Query berisi nama domain (contoh: www.ietf.org)
-- Response berisi alamat IP domain tersebut
-- Terdapat informasi seperti:
-  - Transaction ID
-  - Flags
-  - Questions dan Answers
+Mail server:
+- oxforduni.in.tmes.trendmicro.eu
 
-Hal ini menunjukkan proses translasi domain ke IP address berjalan dengan benar.
+Alamat IP:
+- 34.147.168.147
+- 35.242.183.249
+- 35.242.142.110
+- 35.189.126.202
+
+Record MX digunakan untuk menentukan server yang menangani layanan email pada suatu domain.
 
 ---
 
-## Kesimpulan
+### d. Nslookup Domain Lain
 
-1. DNS berfungsi untuk menerjemahkan domain menjadi alamat IP.
-2. Tools seperti nslookup dan ipconfig membantu dalam analisis DNS.
-3. Wireshark dapat digunakan untuk melihat proses query dan response DNS secara detail.
-4. Proses DNS umumnya menggunakan protokol UDP pada port 53.
+Perintah:
+
+nslookup lms.telkomuniversity.ac.id
+
+
+#### Hasil
+![nslookup telkom](../assets/image/nslookup_telkom.png)
+
+#### Pembahasan
+Perintah ini digunakan untuk mengetahui alamat IP domain lain sebagai perbandingan.
+
+Hasil menunjukkan bahwa domain tersebut memiliki beberapa alamat IP (IPv4 dan IPv6), yang menandakan adanya distribusi server untuk meningkatkan performa dan keandalan akses.
+
+---
