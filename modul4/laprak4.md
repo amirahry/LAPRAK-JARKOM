@@ -34,7 +34,7 @@ nslookup -type=NS ox.ac.uk
 
 
 #### Hasil
-![nslookup ns](../assets/image/nslookup_ns.png)
+![nslookup ns](../assets/image/nslookup_nx.png)
 
 #### Pembahasan dan Jawaban
 Perintah ini digunakan untuk mengetahui DNS server otoritatif dari domain **ox.ac.uk**.
