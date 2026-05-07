@@ -1,4 +1,3 @@
-````md
 # LAPORAN PRAKTIKUM MODUL 4 : DNS
 
 ## Tujuan Praktikum
