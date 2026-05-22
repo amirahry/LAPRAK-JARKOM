@@ -60,7 +60,7 @@ Didapatkan field sebagai berikut:
 ## 2. Perhatikan informasi “content field” pada paket yang Anda pilih di pertanyaan 1. Berapa panjang (dalam satuan byte) masing-masing “field” yang terdapat pada header UDP?
 
 
-![UDP Content Field](assets/udp-content-field.png)
+![UDP Content Field](assets/dp-content-field.png)
 
 ### Jawaban
 
@@ -70,7 +70,7 @@ Header UDP memiliki ukuran tetap yaitu **8 byte**. Header ini terdiri dari **4 f
 
 ## 3. Nilai yang tertera pada “Length” menyatakan nilai apa? Verifikasi jawaban Anda melalui paket UDP pada trace.
 
-![UDP Length](assets/image/udp-length.png)
+![UDP Length](assets/udp-length.png)
 
 ### Jawaban
 
