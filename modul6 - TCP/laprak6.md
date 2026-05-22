@@ -44,7 +44,7 @@ File `alice.txt` diunduh dari website yang telah disediakan pada modul.
 
 ## 2. Membuka website upload file TCP Wireshark
 
-![TCP Upload Website](assets/image/tcp-upload-web.png)
+![TCP Upload Website](assets/image/upload-web.png)
 
 Kemudian mengupload file yang telah diunduh sebelumnya. Sebelum mengupload file, Wireshark harus dijalankan terlebih dahulu.
 
