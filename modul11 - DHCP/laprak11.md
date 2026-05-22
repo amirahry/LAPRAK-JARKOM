@@ -11,7 +11,7 @@ Pada modul ini dilakukan pengamatan terhadap protokol DHCP (*Dynamic Host Config
 
 DHCP digunakan untuk memberikan alamat IP secara otomatis kepada host serta mengkonfigurasi informasi jaringan lainnya seperti subnet mask, gateway, dan DNS.
 
-Melalui praktikum ini dilakukan proses capture paket DHCP untuk melihat proses komunikasi antara client dan server DHCP.
+Melalui praktikum ini dilakukan proses capture paket DHCP untuk melihat komunikasi antara client dan server DHCP.
 
 ---
 
@@ -25,134 +25,141 @@ Melalui praktikum ini dilakukan proses capture paket DHCP untuk melihat proses k
 
 ---
 
-# 11.3 Mengumpulkan Jejak Paket
+# 11.3 Langkah Percobaan
 
-DHCP bekerja dengan proses pertukaran paket antara client dan server untuk memperoleh alamat IP.
+## A. Membuka Wireshark
 
-Pada praktikum ini dilakukan proses capture paket DHCP menggunakan Wireshark.
-
----
-
-## A. Capture DHCP pada Mac
-
-### Perintah Terminal
-
-```bash
-sudo ipconfig set en0 none
-```
-
-Perintah tersebut digunakan untuk menghapus konfigurasi IP pada interface jaringan.
+1. Buka aplikasi Wireshark.
+2. Pilih interface jaringan yang sedang digunakan.
+3. Klik tombol Start untuk memulai capture paket.
 
 ---
 
-### Request DHCP
+## B. Melakukan Release IP
 
-```bash
-sudo ipconfig set en0 dhcp
-```
+### Pada Windows
 
-Perintah tersebut digunakan agar perangkat meminta alamat IP baru dari server DHCP.
-
----
-
-## B. Capture DHCP pada Linux
-
-### Menghapus IP Address
-
-```bash
-sudo ip addr flush en0
-sudo dhclient -r
-```
-
-Digunakan untuk menghapus alamat IP pada interface jaringan.
-
----
-
-### Request DHCP Baru
-
-```bash
-sudo dhclient en0
-```
-
-Digunakan untuk meminta alamat IP baru dari server DHCP.
-
----
-
-## C. Capture DHCP pada Windows
-
-### Release IP
+1. Buka Command Prompt.
+2. Ketik perintah berikut:
 
 ```bash
 ipconfig /release
 ```
 
-Digunakan untuk melepaskan alamat IP yang sedang digunakan.
+3. Tekan Enter.
+4. Tunggu hingga alamat IP berhasil dilepaskan.
+
+![IP Release](assets/image/ip-release.png)
 
 ---
 
-### Renew IP
+## C. Melakukan Renew IP
+
+1. Pada Command Prompt ketik:
 
 ```bash
 ipconfig /renew
 ```
 
-Digunakan untuk meminta alamat IP baru dari server DHCP.
+2. Tekan Enter.
+3. Tunggu beberapa saat hingga perangkat mendapatkan alamat IP baru dari DHCP Server.
+
+![IP Renew](assets/image/ip-renew.png)
 
 ---
 
-# 11.4 Capture DHCP pada Wireshark
+## D. Menghentikan Capture Wireshark
 
-![DHCP Wireshark](assets/image/dhcp-wireshark.png)
+1. Setelah proses renew selesai, kembali ke Wireshark.
+2. Klik tombol Stop Capture.
 
-Pada Wireshark dilakukan filter:
+---
+
+## E. Melakukan Filter DHCP
+
+1. Pada kolom filter Wireshark ketik:
 
 ```text
 dhcp
 ```
 
-Filter tersebut digunakan untuk menampilkan paket DHCP saja.
+2. Tekan Enter.
+3. Wireshark akan menampilkan paket DHCP.
+
+![DHCP Filter](assets/image/dhcp-filter.png)
 
 ---
 
-# 11.5 Analisis Paket DHCP
-
-Pada hasil capture terlihat beberapa proses komunikasi DHCP yaitu:
-
-- DHCP Discover
-- DHCP Offer
-- DHCP Request
-- DHCP ACK
-
-Proses tersebut menunjukkan tahapan perangkat client dalam memperoleh alamat IP dari server DHCP.
-
----
+# 11.4 Analisis Paket DHCP
 
 ## A. DHCP Discover
 
-Client mengirim broadcast untuk mencari server DHCP yang tersedia pada jaringan.
+![DHCP Discover](assets/image/dhcp-discover.png)
+
+### Penjelasan
+
+DHCP Discover merupakan proses awal ketika client mencari DHCP Server yang tersedia pada jaringan.
+
+Paket dikirim secara broadcast karena client belum mengetahui alamat server DHCP.
 
 ---
 
 ## B. DHCP Offer
 
-Server DHCP memberikan penawaran alamat IP kepada client.
+![DHCP Offer](assets/image/dhcp-offer.png)
+
+### Penjelasan
+
+DHCP Server memberikan penawaran alamat IP kepada client.
+
+Paket ini berisi:
+- IP Address
+- Subnet Mask
+- Gateway
+- DNS
 
 ---
 
 ## C. DHCP Request
 
-Client meminta alamat IP yang ditawarkan oleh server DHCP.
+![DHCP Request](assets/image/dhcp-request.png)
+
+### Penjelasan
+
+Client meminta alamat IP yang telah ditawarkan oleh DHCP Server.
+
+Client juga memberi tahu server bahwa alamat IP tersebut akan digunakan.
 
 ---
 
 ## D. DHCP ACK
 
-Server DHCP mengonfirmasi bahwa alamat IP berhasil diberikan kepada client.
+![DHCP ACK](assets/image/dhcp-ack.png)
+
+### Penjelasan
+
+DHCP ACK merupakan konfirmasi dari server bahwa alamat IP berhasil diberikan kepada client.
+
+Setelah proses ini selesai maka client dapat menggunakan jaringan.
+
+---
+
+# 11.5 Hasil Capture DHCP pada Wireshark
+
+![DHCP Wireshark](assets/image/dhcp-wireshark.png)
+
+Pada hasil capture terlihat proses:
+- DHCP Discover
+- DHCP Offer
+- DHCP Request
+- DHCP ACK
+
+yang menunjukkan komunikasi antara client dan server DHCP.
 
 ---
 
 # 11.6 Kesimpulan
 
-Berdasarkan hasil praktikum dapat disimpulkan bahwa DHCP merupakan protokol yang digunakan untuk memberikan alamat IP secara otomatis kepada client pada jaringan komputer.
+Berdasarkan hasil praktikum dapat disimpulkan bahwa DHCP merupakan protokol yang digunakan untuk memberikan alamat IP secara otomatis kepada perangkat pada jaringan komputer.
 
-Melalui Wireshark dapat diamati proses komunikasi DHCP mulai dari Discover, Offer, Request, hingga ACK yang terjadi antara client dan server DHCP.
+Melalui Wireshark dapat diamati proses komunikasi DHCP mulai dari Discover, Offer, Request, hingga ACK antara client dan server DHCP.
