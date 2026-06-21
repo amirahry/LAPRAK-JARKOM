@@ -247,6 +247,3 @@ Traceroute memanfaatkan pesan Time Exceeded untuk mengidentifikasi router yang d
 ## 5. Kesimpulan
 
 Berdasarkan hasil praktikum yang dilakukan, ICMP merupakan protokol yang berfungsi untuk pertukaran pesan kontrol dan informasi kesalahan dalam jaringan IP. Perintah Ping menggunakan ICMP Echo Request dan Echo Reply untuk menguji konektivitas serta mengukur RTT. Sementara itu, Traceroute memanfaatkan ICMP Time Exceeded untuk mengetahui jalur router yang dilewati menuju host tujuan. Dengan bantuan Wireshark, seluruh proses ini dapat dianalisis secara rinci mulai dari header IPv4, header ICMP, hingga jenis-jenis pesan ICMP yang digunakan.
-
-```
-```
