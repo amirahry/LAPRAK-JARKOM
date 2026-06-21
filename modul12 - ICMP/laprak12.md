@@ -1,7 +1,4 @@
-````md
-# Laporan Praktikum Jaringan Komputer
-
-## Modul 12: ICMP dan Asistensi Tugas Besar
+# LAPORAN PRAKTIKUM MODUL 12 : ICMP
 
 ## 1. Tujuan Praktikum
 
